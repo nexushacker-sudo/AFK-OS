@@ -1,0 +1,36 @@
+# Builds linuxlive.yaml into a live ISO, boots it five ways in QEMU and checks
+# it against the spec. Runs on every push to main, once a month (so the ISO
+# gets the newest packages and security fixes), and by hand from the Actions
+# tab (Run workflow). Download the ISO from the finished run's Artifacts.
+#
+# To build with a newer linuxlive release, change @v0.9.2 below.
+name: build
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: [README.md]
+  # Monthly rebuild: the 7th at 06:41 UTC. GitHub pauses it after 60 days
+  # without a commit: Enable workflow in the Actions tab, or Rebuild now on
+  # linuxlive.com's My distros page, turns it back on.
+  schedule:
+    - cron: "41 6 7 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  # Fedora-based distros: the build publishes its system image to this
+  # repository's packages (ghcr.io), which the installer and updates use.
+  packages: write
+
+# A new push cancels a build still running for an older one.
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    uses: Eric-Ness/linuxlive/.github/workflows/build.yml@v0.9.2
+    with:
+      spec: linuxlive.yaml
+      publish-image: true
