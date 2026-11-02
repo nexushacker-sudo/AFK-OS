@@ -14,13 +14,13 @@ apps:
   - discord
   - vscode
   - chromium
-  - obs-studio
+  - krita
+  - gimp
   - blender
   - audacity
-  - flatseal
+  - obs-studio
 flathub:
   - com.usebottles.bottles
-  - org.winehq.Wine
   - net.davidotek.pupgui2
   - com.protonvpn.www
   - org.dupot.easyflatpak
@@ -42,6 +42,9 @@ branding:
       - assets/splash/progress-bg.png
       - assets/splash/progress-fill.png
 settings:
+  language: fr_FR
+  keyboard: "fr"
+  timezone: Europe/Paris
   dock:
     - firefox
     - libreoffice
@@ -49,32 +52,9 @@ settings:
     - steam
     - discord
     - vscode
-    - obs-studio
+    - chromium
     - blender
-    - audacity
-    - org.winehq.Wine
+    - obs-studio
     - com.protonvpn.www
-    - io.missioncenter.MissionCenter
 firefox:
   homepage: "https://google.com"
-# Your own additions. Scripts and repos run as root; read them before you share the distro.
-packages:
-  - git
-  - curl
-  - wget
-  - htop
-  - unzip
-  - p7zip-full
-  - build-essential
-  - python3
-  - python3-pip
-  - python3-venv
-  - ffmpeg
-  - gparted
-  - timeshift
-  - gufw
-  - mesa-vulkan-drivers
-  - mesa-utils
-  - zram-tools
-  - smartmontools
-  - fwupd
