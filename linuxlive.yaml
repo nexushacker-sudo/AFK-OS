@@ -1,15 +1,80 @@
-# Your distro. Change anything here, commit, and GitHub Actions builds it.
-# Every option is explained at
-# https://docs.linuxlive.com/spec/reference/
+# AFK OS, made with the linuxlive.com wizard on 2026-11-02.
+# Build it in your own GitHub from https://github.com/Eric-Ness/linuxlive-distro (see README.md)
 schema_version: 1
-name: My Distro          # up to 40 characters; shown in the boot menu and About screen
-version: "0.1"           # keep the quotes
-base: ubuntu             # ubuntu or fedora
-desktop: cinnamon        # gnome, kde or cinnamon
-apps:                    # from Flathub; app ids: https://docs.linuxlive.com/spec/catalog/
+name: "AFK OS"
+version: "1.0"
+base: ubuntu
+desktop: kde
+apps:
   - firefox
+  - libreoffice
   - vlc
+  - steam
+  - heroic
+  - discord
+  - vscode
+  - chromium
+  - obs-studio
+  - blender
+  - audacity
+  - flatseal
+flathub:
+  - com.usebottles.bottles
+  - org.winehq.Wine
+  - net.davidotek.pupgui2
+  - com.protonvpn.www
+  - org.dupot.easyflatpak
+  - io.github.flattool.Warehouse
+  - page.codeberg.JakobDev.jdFlatpakSnapshot
+  - io.missioncenter.MissionCenter
+  - org.bleachbit.BleachBit
+  - dev.ibrahimcetin.reins
+  - it.mijorus.whisper
+  - org.freedesktop.Piper
 branding:
-  wallpaper: assets/wallpaper.png   # PNG, at least 1280x720, with one strong colour
-  logo: assets/logo.png             # square PNG of 128, 256 or 512 pixels
-  accent_color: "#c2185b"           # used by KDE and GNOME; keep the quotes
+  wallpaper: assets/wallpaper.png
+  logo: assets/logo.png
+  accent_color: "#1565c0"
+  splash:
+    script: assets/splash/splash.script
+    images:
+      - assets/splash/logo.png
+      - assets/splash/progress-bg.png
+      - assets/splash/progress-fill.png
+settings:
+  dock:
+    - firefox
+    - libreoffice
+    - vlc
+    - steam
+    - discord
+    - vscode
+    - obs-studio
+    - blender
+    - audacity
+    - org.winehq.Wine
+    - com.protonvpn.www
+    - io.missioncenter.MissionCenter
+firefox:
+  homepage: "https://google.com"
+# Your own additions. Scripts and repos run as root; read them before you share the distro.
+packages:
+  - git
+  - curl
+  - wget
+  - htop
+  - unzip
+  - p7zip-full
+  - build-essential
+  - python3
+  - python3-pip
+  - python3-venv
+  - ffmpeg
+  - gparted
+  - timeshift
+  - gufw
+  - mesa-vulkan-drivers
+  - mesa-utils
+  - zram-tools
+  - smartmontools
+  - fwupd
