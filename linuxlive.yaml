@@ -36,6 +36,9 @@ branding:
       - assets/splash/progress-bg.png
       - assets/splash/progress-fill.png
 settings:
+  language: fr_FR
+  keyboard: "fr"
+  timezone: Europe/Paris
   dock:
     - firefox
     - libreoffice
