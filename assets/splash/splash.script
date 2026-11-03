@@ -38,6 +38,4 @@ fun boot_progress_callback (duration, progress) {
     update_progress(progress);
 }
 
-fun progress_callback (duration, progress) {
-    update_progress(progress);
-}
+Plymouth.SetBootProgressFunction(boot_progress_callback);

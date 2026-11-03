@@ -1,0 +1,117 @@
+#!/bin/sh
+set -eu
+
+title="AFK OS - Apparence"
+
+show_error() {
+    if command -v kdialog >/dev/null 2>&1; then
+        kdialog --title "$title" --error "$1"
+    else
+        printf '%s: %s\n' "$title" "$1" >&2
+    fi
+    exit 1
+}
+
+for command_name in kdialog plasma-apply-colorscheme qdbus6; do
+    if ! command -v "$command_name" >/dev/null 2>&1; then
+        show_error "Composant manquant : $command_name"
+    fi
+done
+
+welcome=0
+if [ "$#" -gt 1 ]; then
+    show_error "Utilisation : afk-theme-picker [neon|classic|mono|--welcome]"
+elif [ "$#" -eq 1 ] && [ "$1" = "--welcome" ]; then
+    welcome=1
+    theme="neon"
+elif [ "$#" -eq 1 ]; then
+    theme=$1
+else
+    if ! theme=$(kdialog --title "$title" --menu \
+        "Choisissez l'apparence du bureau AFK OS :" \
+        neon "Bleu néon — sombre, accents lumineux et dock flottant" \
+        classic "Classique KDE — clair, sobre et barre classique" \
+        mono "Noir et blanc — contraste élevé, style Windows"); then
+        exit 0
+    fi
+fi
+
+case "$theme" in
+    neon)
+        scheme="AFKNeon"
+        wallpaper="/usr/share/wallpapers/AFKOS/Neon.png"
+        panel_length="fit"
+        panel_height=64
+        floating=true
+        applet_floating=true
+        panel_alignment="center"
+        theme_label="Bleu néon"
+        ;;
+    classic)
+        scheme="AFKClassic"
+        wallpaper="/usr/share/wallpapers/AFKOS/Classic.png"
+        panel_length="fill"
+        panel_height=46
+        floating=false
+        applet_floating=false
+        panel_alignment="left"
+        theme_label="Classique KDE"
+        ;;
+    mono)
+        scheme="AFKMono"
+        wallpaper="/usr/share/wallpapers/AFKOS/Monochrome.png"
+        panel_length="fill"
+        panel_height=48
+        floating=false
+        applet_floating=false
+        panel_alignment="center"
+        theme_label="Noir et blanc"
+        ;;
+    *)
+        show_error "Thème inconnu : $theme"
+        ;;
+esac
+
+if [ ! -r "$wallpaper" ]; then
+    show_error "Fond d'écran introuvable : $wallpaper"
+fi
+
+if ! plasma-apply-colorscheme "$scheme"; then
+    show_error "Impossible d'appliquer le jeu de couleurs $scheme."
+fi
+
+attempt=0
+plasma_script="var wallpaper = 'file://$wallpaper';
+desktops().forEach(function (desktop) {
+    desktop.wallpaperPlugin = 'org.kde.image';
+    desktop.currentConfigGroup = ['Wallpaper', 'org.kde.image', 'General'];
+    desktop.writeConfig('Image', wallpaper);
+});
+panels().forEach(function (panel) {
+    if (panel.formFactor !== 'horizontal') {
+        return;
+    }
+    panel.location = 'bottom';
+    panel.alignment = '$panel_alignment';
+    panel.lengthMode = '$panel_length';
+    panel.height = $panel_height;
+    panel.floating = $floating;
+    panel.floatingApplets = $applet_floating;
+});"
+
+while ! qdbus6 org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "$plasma_script" >/dev/null 2>&1; do
+    attempt=$((attempt + 1))
+    if [ "$attempt" -ge 30 ]; then
+        show_error "Plasma ne répond pas. Le jeu de couleurs a été appliqué, mais le fond et le dock n'ont pas pu être changés."
+    fi
+    sleep 1
+done
+
+if [ "$welcome" -eq 1 ]; then
+    kdialog --title "$title" --passivepopup \
+        "Bienvenue ! Le thème Bleu néon est actif. Pour choisir une autre apparence, ouvrez AFK OS - Apparence depuis le menu des applications." \
+        10 >/dev/null 2>&1 &
+else
+    kdialog --title "$title" --passivepopup \
+        "Thème « $theme_label » appliqué." 5 >/dev/null 2>&1 &
+fi

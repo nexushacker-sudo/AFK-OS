@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=AFK OS - Apparence
+Name[fr]=AFK OS - Apparence
+Comment=Choisir le thème et le dock AFK OS
+Comment[fr]=Choisir le thème et le dock AFK OS
+Exec=afk-theme-picker
+Icon=preferences-desktop-theme-global
+Terminal=false
+Categories=Settings;Utility;
+StartupNotify=true

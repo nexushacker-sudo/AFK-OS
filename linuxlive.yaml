@@ -9,10 +9,19 @@ apps:
   - firefox
   - libreoffice
   - vlc
+  - thunderbird
   - steam
+  - heroic
+  - lutris
   - discord
+  - obs-studio
+  - blender
+  - gimp
+  - krita
+  - kdenlive
   - vscode
   - audacity
+  - inkscape
 flathub:
   - com.usebottles.bottles
   - net.davidotek.pupgui2
@@ -24,11 +33,50 @@ flathub:
   - dev.ibrahimcetin.reins
   - it.mijorus.whisper
   - org.freedesktop.Piper
-  - top.akizip.akizip
+  - org.kde.okular
+packages:
+  - ark
+  - kdialog
+  - qdbus-qt6
+  - kdeconnect
+  - kio-extras
+  - smb4k
+  - samba
+  - smbclient
+  - cifs-utils
+  - gvfs-backends
+  - avahi-daemon
+  - libnss-mdns
+  - git
+  - python3
+  - docker.io
+  - wireshark
+  - wine
+files:
+  - src: files/themes/AFKNeon.colors
+    dest: /usr/share/color-schemes/AFKNeon.colors
+  - src: files/themes/AFKClassic.colors
+    dest: /usr/share/color-schemes/AFKClassic.colors
+  - src: files/themes/AFKMono.colors
+    dest: /usr/share/color-schemes/AFKMono.colors
+  - src: assets/wallpaper.png
+    dest: /usr/share/wallpapers/AFKOS/Neon.png
+  - src: assets/themes/classic.png
+    dest: /usr/share/wallpapers/AFKOS/Classic.png
+  - src: assets/themes/monochrome.png
+    dest: /usr/share/wallpapers/AFKOS/Monochrome.png
+  - src: files/afk-theme-picker
+    dest: /usr/bin/afk-theme-picker
+    mode: "0755"
+  - src: files/afk-theme-picker.desktop
+    dest: /usr/share/applications/afk-theme-picker.desktop
+scripts:
+  first-login:
+    - scripts/first-login.sh
 branding:
   wallpaper: assets/wallpaper.png
   logo: assets/logo.png
-  accent_color: "#e0661f"
+  accent_color: "#1688ff"
   splash:
     script: assets/splash/splash.script
     images:
@@ -45,6 +93,8 @@ settings:
     - vlc
     - steam
     - discord
+    - vscode
+    - org.kde.okular
     - io.missioncenter.MissionCenter
 firefox:
   homepage: "https://google.com"

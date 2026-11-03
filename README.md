@@ -1,10 +1,46 @@
 # AFK OS
 
-Your distro kit from linuxlive.com: the spec that describes AFK OS
-and its art.
+AFK OS is an Ubuntu 26.04 LTS and KDE Plasma distro kit by AFK Studio.
+LinuxLive uses `linuxlive.yaml` and the referenced artwork to build the ISO.
 
     linuxlive.yaml          the spec
-    assets/                 wallpaper and logo
+    assets/                 wallpaper, logos and Plymouth splash
+
+## AFK desktop
+
+The first login applies AFK Neon and shows a welcome notice. Open **AFK OS -
+Apparence** from the applications menu at any time to switch between:
+
+- **Bleu néon**: dark blue windows, cyan highlights, the AFK wallpaper and a
+  short, centered floating dock.
+- **Classique KDE**: a light, restrained blue-gray palette and a conventional
+  full-width panel.
+- **Noir et blanc**: high-contrast neutral colors, a monochrome AFK wallpaper
+  and a centered, full-width panel inspired by Windows.
+
+All three profiles also change the wallpaper and panel dimensions/style. The
+task manager, system tray and KDE's native settings remain functional. KDE's
+standard settings pages, Dolphin, SDDM and Discover are retained; the login
+screen keeps the LinuxLive wallpaper. These are AFK color schemes and panel
+profiles built on Breeze/Plasma, not a replacement window manager or a clone
+of Windows.
+
+## Applications and system features
+
+- Catalog apps: Firefox, LibreOffice, VLC, Thunderbird, Steam, Heroic,
+  Lutris, Discord, OBS Studio, Blender, GIMP, Krita, Kdenlive, Audacity,
+  Inkscape and Visual Studio Code.
+- Additional Flathub apps: Bottles, ProtonUp-Qt, Easyflatpak, Warehouse,
+  jdFlatpakSnapshot, Mission Center, BleachBit, Reins
+  (`dev.ibrahimcetin.reins`), Whisper, Piper and Okular.
+- Ubuntu packages: Ark, KDE Connect, SMB/CIFS and network discovery tools,
+  Git, Python, Docker, Wireshark, Wine, KDialog and Qt 6 D-Bus tools.
+
+SMB1 is not enabled. Docker is installed without granting users the
+root-equivalent `docker` group. AFK Store, AFK Settings and AFK AI are not
+included; Discover, KDE System Settings and the AFK appearance selector
+provide the available equivalents. The ISO has not been built or booted from
+this Windows workspace.
 
 ## Build it in your own GitHub (no Linux needed)
 
@@ -14,8 +50,8 @@ and its art.
 2. In your new repository choose "Add file", then "Upload files", and drop
    in everything from this kit except this README (linuxlive.yaml and its
    folders). They replace the template's example. Commit.
-3. Open the Actions tab. The build takes about 20 minutes for Ubuntu and 40
-   for Fedora; it boots the ISO five ways and checks it against your spec.
+3. Open the Actions tab. Build time depends on the selected applications;
+   the workflow boots the ISO and checks it against the spec.
 4. Open the finished run and download "iso-afk-os" under Artifacts: a zip
    with afk-os.iso and its checksum.
 
