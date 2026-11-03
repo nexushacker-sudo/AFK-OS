@@ -1,8 +1,8 @@
-# AFK OS, made with the linuxlive.com wizard on 2026-11-02.
+# AFK OS, made with the linuxlive.com wizard on 2026-11-03.
 # Build it in your own GitHub from https://github.com/Eric-Ness/linuxlive-distro (see README.md)
 schema_version: 1
 name: "AFK OS"
-version: "1.0"
+version: "0.1"
 base: ubuntu
 desktop: kde
 apps:
@@ -10,19 +10,12 @@ apps:
   - libreoffice
   - vlc
   - steam
-  - heroic
   - discord
   - vscode
-  - chromium
-  - krita
-  - gimp
-  - blender
   - audacity
-  - obs-studio
 flathub:
   - com.usebottles.bottles
   - net.davidotek.pupgui2
-  - com.protonvpn.www
   - org.dupot.easyflatpak
   - io.github.flattool.Warehouse
   - page.codeberg.JakobDev.jdFlatpakSnapshot
@@ -31,10 +24,11 @@ flathub:
   - dev.ibrahimcetin.reins
   - it.mijorus.whisper
   - org.freedesktop.Piper
+  - top.akizip.akizip
 branding:
   wallpaper: assets/wallpaper.png
   logo: assets/logo.png
-  accent_color: "#1565c0"
+  accent_color: "#e0661f"
   splash:
     script: assets/splash/splash.script
     images:
@@ -42,19 +36,12 @@ branding:
       - assets/splash/progress-bg.png
       - assets/splash/progress-fill.png
 settings:
-  language: fr_FR
-  keyboard: "fr"
-  timezone: Europe/Paris
   dock:
     - firefox
     - libreoffice
     - vlc
     - steam
     - discord
-    - vscode
-    - chromium
-    - blender
-    - obs-studio
-    - com.protonvpn.www
+    - io.missioncenter.MissionCenter
 firefox:
   homepage: "https://google.com"
