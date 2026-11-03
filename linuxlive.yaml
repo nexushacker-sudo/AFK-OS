@@ -2,7 +2,7 @@
 # Build it in your own GitHub from https://github.com/Eric-Ness/linuxlive-distro (see README.md)
 schema_version: 1
 name: "AFK OS"
-version: "0.1"
+version: "0.2"
 base: ubuntu
 desktop: kde
 apps:
@@ -11,18 +11,19 @@ apps:
   - vlc
   - thunderbird
   - steam
-  - heroic
-  - lutris
   - discord
-  - obs-studio
-  - blender
-  - gimp
-  - krita
-  - kdenlive
   - vscode
   - audacity
+  - gimp
   - inkscape
+  - krita
+  - blender
+  - obs-studio
+  - kdenlive
+  - lutris
+  - heroic
 flathub:
+  - org.kde.okular
   - com.usebottles.bottles
   - net.davidotek.pupgui2
   - org.dupot.easyflatpak
@@ -33,50 +34,43 @@ flathub:
   - dev.ibrahimcetin.reins
   - it.mijorus.whisper
   - org.freedesktop.Piper
-  - org.kde.okular
+  - top.akizip.akizip
 packages:
   - ark
-  - kdialog
-  - qdbus-qt6
   - kdeconnect
-  - kio-extras
-  - smb4k
   - samba
   - smbclient
   - cifs-utils
   - gvfs-backends
+  - kio-extras
+  - smb4k
   - avahi-daemon
-  - libnss-mdns
+  - avahi-utils
   - git
   - python3
   - docker.io
   - wireshark
   - wine
+  - winetricks
+  - curl
+  - zstd
 files:
-  - src: files/themes/AFKNeon.colors
-    dest: /usr/share/color-schemes/AFKNeon.colors
-  - src: files/themes/AFKClassic.colors
-    dest: /usr/share/color-schemes/AFKClassic.colors
-  - src: files/themes/AFKMono.colors
-    dest: /usr/share/color-schemes/AFKMono.colors
-  - src: assets/wallpaper.png
-    dest: /usr/share/wallpapers/AFKOS/Neon.png
-  - src: assets/themes/classic.png
-    dest: /usr/share/wallpapers/AFKOS/Classic.png
-  - src: assets/themes/monochrome.png
-    dest: /usr/share/wallpapers/AFKOS/Monochrome.png
-  - src: files/afk-theme-picker
-    dest: /usr/bin/afk-theme-picker
+  - src: files/maxence/maxence.py
+    dest: /usr/lib/afk-maxence/maxence.py
+  - src: files/maxence/index.html
+    dest: /usr/lib/afk-maxence/index.html
+  - src: files/maxence/afk-maxence.desktop
+    dest: /usr/share/applications/afk-maxence.desktop
+  - src: files/maxence/afk-maxence.desktop
+    dest: /etc/skel/Desktop/Maxence.desktop
     mode: "0755"
-  - src: files/afk-theme-picker.desktop
-    dest: /usr/share/applications/afk-theme-picker.desktop
 scripts:
-  first-login:
-    - scripts/first-login.sh
+  build:
+    - scripts/install-maxence.sh
 branding:
   wallpaper: assets/wallpaper.png
   logo: assets/logo.png
-  accent_color: "#1688ff"
+  accent_color: "#1565c0"
   splash:
     script: assets/splash/splash.script
     images:
@@ -91,10 +85,12 @@ settings:
     - firefox
     - libreoffice
     - vlc
+    - thunderbird
     - steam
     - discord
     - vscode
     - org.kde.okular
+    - com.usebottles.bottles
     - io.missioncenter.MissionCenter
 firefox:
   homepage: "https://google.com"

@@ -1,48 +1,56 @@
 # AFK OS
 
-AFK OS is an Ubuntu 26.04 LTS and KDE Plasma distro kit by AFK Studio.
-LinuxLive uses `linuxlive.yaml` and the referenced artwork to build the ISO.
+AFK OS is a LinuxLive-based Ubuntu 26.04 / KDE Plasma live system by AFK Studio.
+The kit configures its wallpaper, blue accent, Plymouth boot splash, dock,
+applications and selected system packages.
+
+LinuxLive's distro specification does not currently expose a custom KDE theme,
+SDDM login theme, or separate developer/author metadata. The desktop and login
+screen therefore retain their supported KDE defaults; this kit does not claim
+to provide a complete redesign of every Plasma or login interface.
+
+The applications are installed from the LinuxLive catalog or Flathub. The
+additional Ubuntu packages provide archive management, Windows network shares,
+development tools, Wireshark and Wine/Winetricks. Wine and game compatibility
+depend on the application, hardware, drivers and required 32-bit support; they
+are not universal.
+
+## Applications included
+
+LinuxLive catalog: Firefox, LibreOffice, VLC, Thunderbird, Steam, Discord,
+Visual Studio Code, Audacity, GIMP, Inkscape, Krita, Blender, OBS Studio,
+Kdenlive, Lutris and Heroic Games Launcher.
+
+Additional Flathub apps: Okular, Bottles, ProtonUp-Qt, Easyflatpak, Warehouse,
+jdFlatpakSnapshot, Mission Center, BleachBit, Reins, Whisper, Piper and Akizip.
+
+Ubuntu packages: KDE Connect, Ark, Samba, SMB/CIFS and Avahi tools, Git,
+Python 3, Docker, Wireshark, Wine, Winetricks, curl and zstd.
+
+## Maxence, assistant local
+
+Maxence appears in the KDE application menu. Its French-language interface runs
+in its own Firefox window, and a Maxence shortcut is installed on the desktop.
+Click that shortcut to open the window, and click it again to close just
+Maxence; the rest of the user's Firefox windows are left alone. Its interface
+sends questions only to the local Ollama service (`127.0.0.1`), using
+`qwen2.5:1.5b`. Chat history stays in Maxence's dedicated Firefox profile;
+Maxence cannot inspect files or operate the computer.
+
+The Ollama runtime is installed while the image is built. On the first launch,
+Maxence downloads the model from Ollama, so an Internet connection is required
+once; the model is kept on the computer for later offline use. The ISO and
+installed system therefore need enough free disk space for the runtime and
+model. Answers can be inaccurate and should be checked when it matters.
+
+AFK Store and AFK Settings are not included: the supplied kit contains no source
+or installable packages for those projects. No AFK Update component has been
+added.
 
     linuxlive.yaml          the spec
-    assets/                 wallpaper, logos and Plymouth splash
+    assets/                 wallpaper and logo
 
-## AFK desktop
-
-The first login applies AFK Neon and shows a welcome notice. Open **AFK OS -
-Apparence** from the applications menu at any time to switch between:
-
-- **Bleu néon**: dark blue windows, cyan highlights, the AFK wallpaper and a
-  short, centered floating dock.
-- **Classique KDE**: a light, restrained blue-gray palette and a conventional
-  full-width panel.
-- **Noir et blanc**: high-contrast neutral colors, a monochrome AFK wallpaper
-  and a centered, full-width panel inspired by Windows.
-
-All three profiles also change the wallpaper and panel dimensions/style. The
-task manager, system tray and KDE's native settings remain functional. KDE's
-standard settings pages, Dolphin, SDDM and Discover are retained; the login
-screen keeps the LinuxLive wallpaper. These are AFK color schemes and panel
-profiles built on Breeze/Plasma, not a replacement window manager or a clone
-of Windows.
-
-## Applications and system features
-
-- Catalog apps: Firefox, LibreOffice, VLC, Thunderbird, Steam, Heroic,
-  Lutris, Discord, OBS Studio, Blender, GIMP, Krita, Kdenlive, Audacity,
-  Inkscape and Visual Studio Code.
-- Additional Flathub apps: Bottles, ProtonUp-Qt, Easyflatpak, Warehouse,
-  jdFlatpakSnapshot, Mission Center, BleachBit, Reins
-  (`dev.ibrahimcetin.reins`), Whisper, Piper and Okular.
-- Ubuntu packages: Ark, KDE Connect, SMB/CIFS and network discovery tools,
-  Git, Python, Docker, Wireshark, Wine, KDialog and Qt 6 D-Bus tools.
-
-SMB1 is not enabled. Docker is installed without granting users the
-root-equivalent `docker` group. AFK Store, AFK Settings and AFK AI are not
-included; Discover, KDE System Settings and the AFK appearance selector
-provide the available equivalents. The ISO has not been built or booted from
-this Windows workspace.
-
-## Build it in your own GitHub (no Linux needed)
+## Build it in your own GitHub
 
 1. Open https://github.com/Eric-Ness/linuxlive-distro, click "Use this
    template", then "Create a new repository". Keep it public: builds are
@@ -50,15 +58,15 @@ this Windows workspace.
 2. In your new repository choose "Add file", then "Upload files", and drop
    in everything from this kit except this README (linuxlive.yaml and its
    folders). They replace the template's example. Commit.
-3. Open the Actions tab. Build time depends on the selected applications;
-   the workflow boots the ISO and checks it against the spec.
+3. Open the Actions tab. The build takes about 20 minutes for Ubuntu and 40
+   for Fedora; it boots the ISO five ways and checks it against your spec.
 4. Open the finished run and download "iso-afk-os" under Artifacts: a zip
    with afk-os.iso and its checksum.
 
 ## Or build it on your own Linux machine
 
-Building locally needs root, podman, QEMU and a few ISO tools; see
-https://docs.linuxlive.com/spec/building-locally/ for the full list.
+Building the ISO locally needs Linux (or WSL2), root, podman, QEMU and a few ISO
+tools; see https://docs.linuxlive.com/spec/building-locally/ for the full list.
 
     git clone https://github.com/Eric-Ness/linuxlive
     cd linuxlive
